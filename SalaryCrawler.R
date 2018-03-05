@@ -3,18 +3,19 @@ url <- "https://www.liepin.com/zhaopin/?init=1"
 page <- read_html(url)
 # 提取职位
 position <- page %>% 
-  html_nodes('ul.sojob_list div.sojob-item-main div.job-info, h3 a') %>% 
+  html_nodes('ul.sojob_list .sojob-item-main .job-info, h3 a') %>% 
   html_text(trim = TRUE)
 position <- position[-41]
 # 提取链接
 link <- page %>% 
   html_nodes('ul.sojob_list div.job-info, h3 a') %>% 
   html_attrs()
-link.url <- c(1 : length(link))
-for (i in seq_along(link)) {
-  link.url[i] <- link[[i]][1]
-}
-link.url <- link.url[-41]
+#link.url <- c(1 : length(link))
+#for (i in seq_along(link)) {
+#  link.url[i] <- link[[i]][1]
+#}
+link.url <- sapply(link, `[`, 'href')
+link.url <- unname(link.url[-41])
 # 提取薪资
 salary <- page %>% 
   html_nodes('span.text-warning') %>% 
