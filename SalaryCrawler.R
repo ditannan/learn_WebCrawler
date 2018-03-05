@@ -1,5 +1,16 @@
+## -*-coding: utf-8 -*-
+## 
+
 library("rvest")
-url <- "https://www.liepin.com/zhaopin/?init=1"
+
+url <- "https://www.liepin.com/zhaopin/?industries=&dqs=&salary=&jobKind
+=&pubTime=&compkind=&compscale=&industryType=&searchType=1&clean_condition=
+&isAnalysis=&init=1&sortFlag=15&flushckid=0&fromSearchBtn=
+1&headckid=1c3901a0798fb517&d_headId=f1bd455a7dd09e0a402a50cc8965de33&d_ckId=
+f1bd455a7dd09e0a402a50cc8965de33&d_sfrom=search_unknown&d_curPage=0&d_pageSize=
+40&siTag=1B2M2Y8AsgTpgAmY7PhCfg~fA9rXquZc5IkJpXC-Ycixw&key=
+%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B8%88"
+
 page <- read_html(url)
 # 提取职位
 position <- page %>% 
@@ -41,7 +52,7 @@ webdf <- data.frame(
   position = position,
   salary = salary,
   education = edu,
-  experience = experience,
+  experience = exp,
   workplace = workplace,
   link = link.url
 )
